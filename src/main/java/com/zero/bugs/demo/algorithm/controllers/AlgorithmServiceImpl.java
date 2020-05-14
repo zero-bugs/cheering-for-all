@@ -3,7 +3,7 @@ package com.zero.bugs.demo.algorithm.controllers;
 import com.alibaba.fastjson.JSON;
 import com.zero.bugs.demo.algorithm.model.vo.ResponseViewObj;
 import com.zero.bugs.demo.algorithm.repository.SortAlgorithmService;
-import com.zero.bugs.demo.algorithm.repository.TreeAlgorithmService;
+import com.zero.bugs.demo.algorithm.repository.BinSearchTree;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping(value = "/test/method")
 public class AlgorithmServiceImpl {
     SortAlgorithmService sortService = new SortAlgorithmService();
-    TreeAlgorithmService service = new TreeAlgorithmService();
+    BinSearchTree service = new BinSearchTree();
 
 
     @RequestMapping(value = "/sort", method = RequestMethod.POST)

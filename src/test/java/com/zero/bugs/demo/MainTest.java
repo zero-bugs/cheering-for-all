@@ -1,20 +1,25 @@
 package com.zero.bugs.demo;
 
-import com.zero.bugs.demo.algorithm.repository.ArrayBinTree;
+import com.zero.bugs.demo.algorithm.repository.BinaryTree;
 
 public class MainTest {
     public static void main(String[] args) {
+        String[] values = {"A","B","C","D","E","F","G","H","I","J","k"};
 
-        ArrayBinTree<String> binTree = new ArrayBinTree<>(4, "根");
+        BinaryTree<String> binaryTree = new BinaryTree<>();
+        binaryTree.custructBinaryTree(values);
+        binaryTree.preOrderTraversal();
+        binaryTree.midOrderTraversal();
+        binaryTree.backOrderTraversal();
 
-        binTree.add(0, "0右", false);
-        binTree.add(2, "2右", false);
-        binTree.add(2, "2左", true);
-        binTree.add(0, "0左", true);
-        binTree.add(1, "1左", true);
+        binaryTree.custructBinaryTreeIter(values);
+        binaryTree.preOrderTraversal();
+        binaryTree.preOrderTraversalNoIter();
 
-        System.out.println(binTree);
-        System.out.println(binTree.getLeft(2));
-        System.out.println(binTree.getParent(6));
+        binaryTree.midOrderTraversal();
+        binaryTree.midOderListNoIter();
+
+        binaryTree.backOrderTraversal();
+        binaryTree.backOderTraversalNoIter();
     }
 }

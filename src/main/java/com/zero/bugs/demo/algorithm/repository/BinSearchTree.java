@@ -1,6 +1,6 @@
 package com.zero.bugs.demo.algorithm.repository;
 
-public class TreeAlgorithmService {
+public class BinSearchTree {
     Node root;
     String msg;
 
