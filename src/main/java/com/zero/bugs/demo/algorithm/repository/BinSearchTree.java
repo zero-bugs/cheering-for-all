@@ -1,7 +1,8 @@
 package com.zero.bugs.demo.algorithm.repository;
 
-public class TreeAlgorithmService {
+public class BinSearchTree {
     Node root;
+    String msg;
 
     /**
      * 插入节点
@@ -24,6 +25,7 @@ public class TreeAlgorithmService {
      * 先序遍历
      */
     public void inOrderTravel() {
+        msg = "";
         inOrderTravel(root);
     }
 
@@ -31,6 +33,7 @@ public class TreeAlgorithmService {
      * 中序遍历
      */
     public void midOrderTravel() {
+        msg = "";
         midOrderTravel(root);
     }
 
@@ -38,6 +41,7 @@ public class TreeAlgorithmService {
      * 后序遍历
      */
     public void backOrderTravel() {
+        msg = "";
         backOrderTravel(root);
     }
 
@@ -90,6 +94,7 @@ public class TreeAlgorithmService {
 
         inOrderTravel(root.left);
         System.out.print(root.value + ",");
+        msg = msg + root.value + ",";
         inOrderTravel(root.right);
     }
 
@@ -99,6 +104,7 @@ public class TreeAlgorithmService {
         }
 
         System.out.print(root.value + ",");
+        msg = msg + root.value + ",";
         inOrderTravel(root.left);
         inOrderTravel(root.right);
     }
@@ -111,10 +117,25 @@ public class TreeAlgorithmService {
         inOrderTravel(root.left);
         inOrderTravel(root.right);
         System.out.print(root.value + ",");
+        msg = msg + root.value + ",";
     }
+
+
+
+
+
+
+
+
+
+
 
     public Node getRoot() {
         return root;
+    }
+
+    public String getMsg() {
+        return msg;
     }
 }
 
