@@ -21,5 +21,16 @@ public class MainTest {
 
         binaryTree.backOrderTraversal();
         binaryTree.backOderTraversalNoIter();
+        
+        
+        
+        Integer[] values = new Integer[]{12,8,10,6,4,7,9};
+        HeapStackService<Integer> service = new HeapStackService<>();
+        service.buildMaxVertexHeap(values);
+        service.preOrderTraversal();
+        service.midOrderTraversalInner();
+        service.backOrderTraversalInner();
+        service.preOrderTraversalRight();
+        service.arrayTraversal();
     }
 }
