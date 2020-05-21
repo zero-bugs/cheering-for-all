@@ -1,6 +1,8 @@
 package com.zero.bugs.demo.algorithm.repository;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * 二叉树
@@ -9,7 +11,7 @@ import java.util.LinkedList;
  */
 public class BinaryTree<T> {
 
-    private BinNode<T> root;
+    private TreeNode<T> root;
 
 
     /**
@@ -22,17 +24,17 @@ public class BinaryTree<T> {
             return;
         }
 
-        root = new BinNode<T>(values[0]);
+        root = new TreeNode<T>(values[0]);
 
-        LinkedList<BinNode<T>> currentParentNodeList = new LinkedList<BinNode<T>>();
+        LinkedList<TreeNode<T>> currentParentNodeList = new LinkedList<TreeNode<T>>();
         currentParentNodeList.addFirst(root);
         for (int i = 0; i < values.length / 2; ++i) {
-            BinNode<T> leftNode = new BinNode<T>(values[2 * i + 1]);
-            BinNode<T> rightNode = null;
+            TreeNode<T> leftNode = new TreeNode<T>(values[2 * i + 1]);
+            TreeNode<T> rightNode = null;
             if (2 * i + 2 < values.length) {
-                rightNode = new BinNode<T>(values[2 * i + 2]);
+                rightNode = new TreeNode<T>(values[2 * i + 2]);
             }
-            BinNode<T> currentParentNode = currentParentNodeList.pollLast();
+            TreeNode<T> currentParentNode = currentParentNodeList.pollLast();
             currentParentNode.left = leftNode;
             currentParentNode.right = rightNode;
 
@@ -52,7 +54,7 @@ public class BinaryTree<T> {
         root = createTreeNode(values, 0);
     }
 
-    private BinNode<T> createTreeNode(T[] values, int index) {
+    private TreeNode<T> createTreeNode(T[] values, int index) {
 
         if (index >= values.length) {
             return null;
@@ -62,7 +64,7 @@ public class BinaryTree<T> {
             return null;
         }
 
-        BinNode<T> node = new BinNode<T>(values[index]);
+        TreeNode<T> node = new TreeNode<T>(values[index]);
         node.left = createTreeNode(values, 2 * index + 1);
         node.right = createTreeNode(values, 2 * index + 2);
         return node;
@@ -76,7 +78,7 @@ public class BinaryTree<T> {
         System.out.println("");
     }
 
-    private void preOrderTraversal(BinNode<T> root) {
+    private void preOrderTraversal(TreeNode<T> root) {
         if (root == null) {
             return;
         }
@@ -93,7 +95,7 @@ public class BinaryTree<T> {
         System.out.println("");
     }
 
-    private void midOrderTraversal(BinNode<T> root) {
+    private void midOrderTraversal(TreeNode<T> root) {
         if (root == null) {
             return;
         }
@@ -107,7 +109,7 @@ public class BinaryTree<T> {
         System.out.println("");
     }
 
-    private void backOrderTraversal(BinNode<T> root) {
+    private void backOrderTraversal(TreeNode<T> root) {
         if (root == null) {
             return;
         }
@@ -125,13 +127,13 @@ public class BinaryTree<T> {
             return;
         }
 
-        LinkedList<BinNode<T>> stack = new LinkedList<BinNode<T>>();
+        LinkedList<TreeNode<T>> stack = new LinkedList<TreeNode<T>>();
         stack.addFirst(root);
-        BinNode<T> left = root.left;
-        BinNode<T> right = root.right;
+        TreeNode<T> left = root.left;
+        TreeNode<T> right = root.right;
 
-        BinNode<T> current;
-        LinkedList<BinNode<T>> path = new LinkedList<BinNode<T>>();
+        TreeNode<T> current;
+        LinkedList<TreeNode<T>> path = new LinkedList<TreeNode<T>>();
         while (!stack.isEmpty()) {
             current = stack.pollFirst();
             if (current != null) {
@@ -141,7 +143,7 @@ public class BinaryTree<T> {
             }
         }
 
-        for (BinNode<T> b : path) {
+        for (TreeNode<T> b : path) {
             System.out.print(b.value);
         }
         System.out.println("");
@@ -152,10 +154,10 @@ public class BinaryTree<T> {
             return;
         }
 
-        LinkedList<BinNode<T>> stack = new LinkedList<BinNode<T>>();
-        BinNode<T> current = root;
-        BinNode<T> tmp;
-        LinkedList<BinNode<T>> path = new LinkedList<BinNode<T>>();
+        LinkedList<TreeNode<T>> stack = new LinkedList<TreeNode<T>>();
+        TreeNode<T> current = root;
+        TreeNode<T> tmp;
+        LinkedList<TreeNode<T>> path = new LinkedList<TreeNode<T>>();
         while (current!=null || !stack.isEmpty()) {
             while (current != null) {
                 stack.addFirst(current);
@@ -167,7 +169,7 @@ public class BinaryTree<T> {
             current = tmp.right;
         }
 
-        for (BinNode<T> b : path) {
+        for (TreeNode<T> b : path) {
             System.out.print(b.value);
         }
         System.out.println("");
@@ -181,13 +183,13 @@ public class BinaryTree<T> {
             return;
         }
 
-        LinkedList<BinNode<T>> stack = new LinkedList<BinNode<T>>();
+        LinkedList<TreeNode<T>> stack = new LinkedList<TreeNode<T>>();
         stack.addFirst(root);
-        BinNode<T> left = root.left;
-        BinNode<T> right = root.right;
+        TreeNode<T> left = root.left;
+        TreeNode<T> right = root.right;
 
-        BinNode<T> current;
-        LinkedList<BinNode<T>> path = new LinkedList<BinNode<T>>();
+        TreeNode<T> current;
+        LinkedList<TreeNode<T>> path = new LinkedList<TreeNode<T>>();
         while (!stack.isEmpty()) {
             current = stack.pollFirst();
             if (current != null) {
@@ -197,7 +199,7 @@ public class BinaryTree<T> {
             }
         }
 
-        for (BinNode<T> b : path) {
+        for (TreeNode<T> b : path) {
             System.out.print(b.value);
         }
         System.out.println("");
@@ -210,18 +212,61 @@ public class BinaryTree<T> {
      * @param value
      * @param leftChild
      */
-    public void insert(BinNode<T> parent, T value, boolean leftChild) {
+    public void insert(TreeNode<T> parent, T value, boolean leftChild) {
 
     }
 
+    /**
+     * 给定一个整数 n，生成所有由 1 ... n 为节点所组成的二叉搜索树。
+     * @param n
+     * @return
+     */
+    public List<TreeNode<Integer>> generateTrees(int n ){
+        if(n<=0){
+            return new ArrayList<TreeNode<Integer>>();
+        }
 
-    static class BinNode<T> {
+        return generateTrees(1, n);
+
+    }
+
+    LinkedList<TreeNode<Integer>> generateTrees(int start, int end) {
+        LinkedList<TreeNode<Integer>> allTrees = new LinkedList<>();
+        if(start>end){
+            allTrees.add(null);
+            return allTrees;
+        }
+
+        for(int i=start;i<=end;++i) {
+            LinkedList<TreeNode<Integer>> leftTrees = generateTrees(start, i - 1);
+            LinkedList<TreeNode<Integer>> rightTrees = generateTrees(i + 1, end);
+
+            for(TreeNode<Integer> left:leftTrees) {
+                for (TreeNode<Integer> right:rightTrees) {
+                    TreeNode<Integer> currentRoot = new TreeNode<Integer>(i);
+                    currentRoot.left = left;
+                    currentRoot.right = right;
+                    allTrees.add(currentRoot);
+                }
+            }
+        }
+        return allTrees;
+    }
+
+
+
+
+    public static class TreeNode<T> {
         T value;
-        BinNode<T> left;
-        BinNode<T> right;
+        TreeNode<T> left;
+        TreeNode<T> right;
 
-        public BinNode(T value) {
+        public TreeNode(T value) {
             this.value = value;
+        }
+
+        public T getValue() {
+            return value;
         }
     }
 }
