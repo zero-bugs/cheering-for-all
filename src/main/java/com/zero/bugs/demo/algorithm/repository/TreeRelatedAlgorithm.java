@@ -15,7 +15,7 @@ public class TreeRelatedAlgorithm {
 
     Map<Integer, Integer> mapPost = new HashMap<>();
 
-    TreeNode root;
+    TreeNode rootT;
 
     public void constructTree(int[] data) {
         if (data == null || data.length == 0) {
@@ -23,7 +23,7 @@ public class TreeRelatedAlgorithm {
         }
 
         if (data.length == 1 && data[0] != INVALID) {
-            root = new TreeNode(data[0]);
+            rootT = new TreeNode(data[0]);
             return;
         }
 
@@ -31,9 +31,9 @@ public class TreeRelatedAlgorithm {
             return;
         }
 
-        root = new TreeNode(data[0]);
+        rootT = new TreeNode(data[0]);
         LinkedList<TreeNode> queue = new LinkedList<>();
-        queue.addFirst(root);
+        queue.addFirst(rootT);
 
         int maxParentIndex = data.length / 2 - 1;
         for (int i = 0; i <= maxParentIndex; ++i) {
@@ -61,7 +61,7 @@ public class TreeRelatedAlgorithm {
 
 
     public void constructTreeRecur(int[] datas) {
-        root = constructTreeRecur(datas, 0);
+        rootT = constructTreeRecur(datas, 0);
     }
 
     private TreeNode constructTreeRecur(int[] datas, int i) {
@@ -78,18 +78,23 @@ public class TreeRelatedAlgorithm {
         return root;
     }
 
-    public void BFS(TreeNode root) {
-        if (root == null) return;
+    /**
+     * 广度优先遍历 核心函数
+     * @param root
+     * @return
+     */
+    public List<List<TreeNode>> BFS(TreeNode root) {
+        List<List<TreeNode>> result = new LinkedList<>();
+        if (root == null) return result;
 
-        List<List<Integer>> result = new LinkedList<>();
         LinkedList<TreeNode> queue = new LinkedList<>();
         queue.addFirst(root);
         while (!queue.isEmpty()){
-            List<Integer> lst = new LinkedList<>();
+            List<TreeNode> lst = new LinkedList<>();
             int length = queue.size();
             for (int i=0;i<length;++i) {
                 TreeNode node = queue.pollLast();
-                lst.add(node.val);
+                lst.add(node);
 
                 if (node.left!=null) queue.addFirst(node.left);
                 if (node.right !=null) queue.addFirst(node.right);
@@ -97,13 +102,14 @@ public class TreeRelatedAlgorithm {
             result.add(lst);
         }
 
-        for(List<Integer> lst : result) {
+        for(List<TreeNode> lst : result) {
             System.out.print("[");
-            for(Integer l:lst){
-                System.out.print(l +",");
+            for(TreeNode l:lst){
+                System.out.print(l.val + ",");
             }
             System.out.println("]");
         }
+        return result;
     }
 
 
@@ -436,9 +442,9 @@ public class TreeRelatedAlgorithm {
             int cSum = 0;
             for (TreeNode t : p) {
                 cSum += t.val;
-                System.out.print(t.val + ",");
+//                System.out.print(t.val + ",");
             }
-            System.out.println("-----------------");
+//            System.out.println("-----------------sum:" + cSum);
             if (cSum == sum) {
                 return true;
             }
@@ -446,6 +452,12 @@ public class TreeRelatedAlgorithm {
         return false;
     }
 
+    /**
+     * 二叉树所有路径，核心函数
+     * @param root
+     * @param path
+     * @param paths
+     */
     public void printAllPath(TreeNode root, LinkedList<TreeNode> path, LinkedList<List<TreeNode>> paths) {
         if (root == null) {
             return;
@@ -456,12 +468,32 @@ public class TreeRelatedAlgorithm {
             LinkedList<TreeNode> ll = new LinkedList<>(path);
             Collections.reverse(ll);
             paths.add(ll);
-            path.pollFirst();
         } else {
             printAllPath(root.left, path, paths);
-            // path.pollFirst();
             printAllPath(root.right, path, paths);
-            path.pollFirst();
+        }
+        path.pollFirst();
+    }
+
+    /**
+     * 数组展开为单链表
+     * @param root
+     */
+    public void flatten(TreeNode root) {
+        if (root == null) return;
+
+        LinkedList<TreeNode> stack = new LinkedList<>();
+        stack.addFirst(root);
+        TreeNode newRoot  = new TreeNode(-1);
+        TreeNode preNode = newRoot;
+        while (!stack.isEmpty()) {
+            TreeNode current = stack.pollFirst();
+            preNode.right = current;
+            preNode.left = null;
+
+            if (current.right!= null) stack.addFirst(current.right);
+            if (current.left!= null) stack.addFirst(current.left);
+            preNode = current;
         }
     }
 
@@ -473,11 +505,8 @@ public class TreeRelatedAlgorithm {
 
 
 
-
-
-
-    public TreeNode getRoot() {
-        return root;
+    public TreeNode getRootT() {
+        return rootT;
     }
 }
 
