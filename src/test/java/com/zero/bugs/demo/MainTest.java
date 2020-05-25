@@ -1,14 +1,19 @@
 package com.zero.bugs.demo;
 
-import com.zero.bugs.demo.algorithm.repository.BinaryTree;
+import com.zero.bugs.demo.algorithm.repository.TreeRelatedAlgorithm;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class MainTest {
-    public static void main(String[] args) {
+    public static final int INVALID = -0xffff;
 
+    public static void main(String[] args) {
+        TreeRelatedAlgorithm service = new TreeRelatedAlgorithm();
+        service.constructTree(new int[]{5,4,8,11,INVALID,13,4,7,2,INVALID,INVALID,5,1});
+        service.BFS(service.getRootT());
+        System.out.println(service.hasPathSum(service.getRootT(),22));
     }
 
 
