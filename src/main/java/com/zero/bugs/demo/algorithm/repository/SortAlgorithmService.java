@@ -188,9 +188,7 @@ public class SortAlgorithmService {
         int i;
         for (i = markIndex; i <= high; ++i) {
             if (data[i] < data[pivotIndex]) {
-                if (i != pivotIndex) {
-                    swap(data, markIndex, i);
-                }
+                swap(data, markIndex, i);
                 ++markIndex;
             }
         }
@@ -199,6 +197,9 @@ public class SortAlgorithmService {
     }
 
     private void swap(int[] data, int i, int j) {
+        if (i == j) {
+            return;
+        }
         int tmp;
         tmp = data[j];
         data[j] = data[i];
